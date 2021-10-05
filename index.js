@@ -23,14 +23,16 @@ const server = http.createServer( (req,res) =>{
                 });
                 break;    
         default:
-            fs.readFile('./views/hiba404.html', (err,file) =>{
-                res.setHeader('Content-Type', 'text/html');
-                res.end(file);
-            });
+            kiszolgal('./views/hiba404.html','text/html',req,res);
             //Majd ezt is kuldom állományból    
     }
 })
 
-
+function kiszolgal(filename, type, req, res){
+    fs.readFile(filename, (err,file) =>{
+        res.setHeader('Content-Type', type);
+        res.end(file);
+    });
+}
 
 server.listen(port);
